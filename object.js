@@ -177,4 +177,31 @@ o2.score = o2.score.concat(); // 배열의 복제
 */
 const of1 = { name: "jerga", score: [2, 3] };
 of1.name = "filip";
-console.log(of1);
+console.log(of1); // name: filip, score: [2,3]
+
+Object.freeze(of1); // 객체 얼리기 - 불변성 지키기
+of1.name = "asher";
+console.log(of1); // name: filip, score: [2,3]
+
+// 한번 얼리면 풀 수 없음. 풀 방법은 온리 복제
+
+of1.score.push(4);
+console.log(of1); // name: filip, score: [2,3,4]
+
+// 하지만 score같은 경우 다른 메모리를 참조하는 객체(배열) 임으로 freeze를 통해서 불변성을 유지시킬 수 가 없다
+Object.freeze(of1.score); // 그렇기 때문에 새로운 메모리를 참조하는 프로퍼티 또한 freeze를 주어야한다
+
+/*
+  ==============
+  const 와 Object.freeze의 차이
+  ==============
+*/
+/*
+  const 는 데이터 값 자체를 바꾸는 것이 불가능한 것이고
+  freeze 는 데이터의 프로퍼티 값을 바꾸는 것을 불가능하게 하는 것이다
+*/
+const obj1 = { name: "yosi" };
+Object.freeze(obj1);
+const obj2 = { name: "lee" };
+obj1 = obj2; // Assignment to constant variable. 이미 obj1가 constant 변수로 선언되어있기 때문에 데이터 변경이 불가능 함을 나타낸다
+obj1.name = "park"; // name: "kim" > freeze를 사용했기 때문에 해당 객체의 프로퍼티값을 변경시킬 수가 없게 되었기 때문에 값이 변하지 않는다
