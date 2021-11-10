@@ -4,15 +4,12 @@
 
 ## 참조
 
-| Title | Site |
-| ------ | ------ |
-| 모던 자바스크립트(javascript) 개발을 위한 ES6 강좌 | https://www.inflearn.com/course/es6-강좌-자바스크립트/dashboard |
-| 클린코드 자바스크립트 | https://www.udemy.com/course/clean-code-js/learn/lecture/28091950#overview |
-| 생활코딩 - JavaScript Immutability | https://www.inflearn.com/course/javascript-immutability/dashboard |
-
-
-
-
+| Title                                              | Site                                                                       |
+| -------------------------------------------------- | -------------------------------------------------------------------------- |
+| 모던 자바스크립트(javascript) 개발을 위한 ES6 강좌 | https://www.inflearn.com/course/es6-강좌-자바스크립트/dashboard            |
+| 클린코드 자바스크립트                              | https://www.udemy.com/course/clean-code-js/learn/lecture/28091950#overview |
+| 생활코딩 - JavaScript Immutability                 | https://www.inflearn.com/course/javascript-immutability/dashboard          |
+| 클로저                                             | https://opentutorials.org/course/743/6544                                  |
 
 ECMAScript 6 compatibility table
 https://kangax.github.io/compat-table/es6/
