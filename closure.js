@@ -20,15 +20,21 @@ function outter() {
     console.log(title2);
   };
 
+  // 3번역시 동일하다
+  const inner3 = () => {
+    const title3 = "coding everywhere";
+    console.log(title3);
+  };
+
   // inner함수는 outter 함수 안에서만 쓰인다는 의미를 가지며 응집성이 좋고 보기에도 좋다
 
-  inner();
+  return inner();
 }
 outter();
 
 /*
   ==============
-  내부함수와 외부함수의 밀접관계
+  내부함수와 외부함수의 밀접 관계
   ==============
 */
 function outter2() {
@@ -76,6 +82,8 @@ console.log(3.1, matrix.get_title()); // 3 Matrix
 ghost.set_title("공각기동대"); // 내부적으로 바라보는 외부함수의 title을 변경이 가능하다
 // 또한 factory_movie 라는 함수의 title을 바꾸고 있지만 함수가 리턴받은 변수에 한에서만 데이터가 바뀌기 때문에
 // factory_movie의 데이터를 바꾸더라도 다른 변수에서 선언한 factory_movie의 데이터에는 영향이 가지 않는다
+
+matrix.title = "요시";
 
 console.log(3.2, ghost.get_title());
 console.log(3.2, matrix.get_title());
@@ -147,3 +155,40 @@ for (var i = 0; i < 5; i++) {
 for (var index in arr) {
   console.log(3.5, arr[index]());
 }
+
+// 스코프를 이용한 예제
+let arr2 = [];
+for (let i = 0; i < 5; i++) {
+  arr2[i] = function () {
+    return i;
+  };
+}
+for (let index in arr) {
+  console.log(3.5, arr2[index]());
+}
+
+/*
+  ==============
+  클로저의 메모리 누수
+  ==============
+*/
+// 클로저는 가비지 컬렉터의 수거 대상이 되지 않는다. 생성 및 메모리에 할당된 후 사용되지 않을 때 제거되지 않고 계속 남아 있음으로서 메모리 누수가 발생하게 된다.
+// 이때문에 클로저 사용을 지양하는 사람도 있지만 클로저의 참조 카운트를 0으로 만들어만 준다면 가비지 컬렉터의 대상이 되고 제거됨으로서 메모리 누수가 아니게 된다.
+// > 메모리 누수: 개발자의 의도와 달리 어떤 값의 참조 카운트가 0이 되지 않아 가비지 컬렉터의 수거 대상이 되지않아 사용하지 않는데 계속 남아있는 것을 의미한다
+
+// 클로저를 수거 대상으로 만들기 (참조 카운트 0 만들기)
+let outter4 = () => {
+  let a = 1;
+  const inner = () => {
+    return ++a;
+  };
+  return inner;
+};
+
+let cs1 = outter4(); // outter는 호출이 된 후 소멸되었지만 a라는 outter의 전역 변수는 inner함수가 참조해야 함으로 메모리에 저장이 되어 진다
+console.log(4, cs1());
+
+// 이후 a 변수에 대한 메모리는 사용이 되지 않더라도 메모리에 남아있는 상황
+cs1 = null; // // outer 식별자의 inner 함수 참조를 끊음
+// console.log(4.1, cs1()); // not a function
+console.log(4.1, cs1); // null
